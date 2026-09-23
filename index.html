@@ -634,8 +634,14 @@
             box-shadow: 0 0 20px rgba(66, 184, 131, 0.6);
         }
 
-        .card:nth-child(2) button {
+        .card:nth-child(2) button,
+        .card:nth-child(2) a.btn-assistir {
             background: #c69a00;
+        }
+
+        .card:nth-child(2) a.btn-assistir:hover {
+            background: #a88200;
+            box-shadow: 0 0 20px rgba(255, 210, 0, 0.6);
         }
 
 
@@ -1475,33 +1481,33 @@
 
 
             <!-- =========================
-                 REDES
+                 FLASK & PYTHON (LINK DIRETO PLAYLIST)
             ========================= -->
 
             <article class="card">
 
                 <div class="course-icon"
-                    aria-label="Ícone de redes">
-                    <i class="fa-solid fa-globe"></i>
+                    aria-label="Ícone de Flask e Python">
+                    <i class="devicon-flask-original"></i>
                 </div>
 
                 <h2>
-                    Redes
+                    Flask
                 </h2>
 
                 <p>
-                    Aprenda sobre redes, infraestrutura, servidores e conectividade.
+                    Crie servidores web, rotas, templates e APIs com Flask e Python.
                 </p>
 
-                <button
-                    type="button"
-                    class="open-video"
-                    data-video="https://www.youtube.com/embed/qiQR5rTSshw"
-                    data-title="Redes de Computadores">
+                <a
+                    href="https://oscarmoraes.github.io/FlaskGamificado/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="btn-assistir">
 
                     ▶ Assistir
 
-                </button>
+                </a>
 
             </article>
 
@@ -1714,13 +1720,13 @@
                 <article class="info-box">
 
                     <h3>
-                        🌐 Redes e Infraestrutura
+                        🧪 Flask & Python
                     </h3>
 
                     <p>
-                        Desenvolva conhecimentos sobre
-                        redes, servidores, infraestrutura
-                        e conectividade.
+                        Desenvolva servidores web,
+                        rotas, templates Jinja2 e
+                        bancos de dados com ORM.
                     </p>
 
                 </article>
