@@ -1,2139 +1,703 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR" class="scroll-smooth">
 
 <head>
-
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="DevTube SENAI - Hub de Funis Gamificados, videoaulas interativas e ecossistema de desenvolvimento.">
 
-    <meta name="viewport"
-        content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="https://icons.iconarchive.com/icons/icons-land/vista-hardware-devices/256/Computer-icon.png">
 
-    <meta name="description"
-        content="DevTube SENAI - Cursos, educação, tecnologia e inovação">
-        
-    <link rel="stylesheet" type='text/css' href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
+    <title>DevTube SENAI | Hub de Funis Gamificados</title>
 
-    <link rel="stylesheet" type='text/css' href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
 
-    <link rel="icon"
-        type="image/x-icon"
-        href="https://icons.iconarchive.com/icons/icons-land/vista-hardware-devices/256/Computer-icon.png">
+    <!-- Font Awesome & Devicon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
 
-    <title>DevTube SENAI | Cursos</title>
-
-
+    <!-- Custom Tailwind Setup / Styles -->
     <style>
-
-        /* =========================
-           RESET
-        ========================= */
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        /* Scrollbar customizada moderna */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
         }
-
-        html {
-            scroll-behavior: smooth;
+        ::-webkit-scrollbar-track {
+            background: #071323;
         }
-
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-            background: #000;
-            color: #fff;
-            line-height: 1.5;
-            overflow-x: hidden;
-            transition: background 0.3s ease, color 0.3s ease;
+        ::-webkit-scrollbar-thumb {
+            background: #1e3a5f;
+            border-radius: 4px;
         }
-
-        body.modal-open {
-            overflow: hidden;
+        ::-webkit-scrollbar-thumb:hover {
+            background: #0284c7;
         }
-
-        button,
-        a {
-            font-family: inherit;
-        }
-
-
-        /* =========================
-           CABEÇALHO
-        ========================= */
-
-        header {
-            width: 100%;
-
-            background: rgba(0, 20, 35, 0.95);
-            color: white;
-
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-
-            padding: 18px 8%;
-
-            box-shadow:
-                0 3px 20px rgba(0, 91, 150, 0.35);
-
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-
-            backdrop-filter: blur(12px);
-
-            border-bottom:
-                1px solid rgba(0, 183, 255, 0.2);
-
-            transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-        }
-
-
-        .logo {
-            font-size: 28px;
-            font-weight: 900;
-            letter-spacing: 2px;
-
-            color: #fff;
-
-            text-shadow:
-                0 0 10px #008cff,
-                0 0 25px rgba(0, 140, 255, 0.6);
-
-            transition: 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            text-decoration: none;
-        }
-
-        .logo i {
-            color: #e30613;
-            font-size: 32px;
-            filter: drop-shadow(0 0 8px rgba(227, 6, 19, 0.6));
-        }
-
-        .logo span {
-            color: #00aaff;
-            transition: color 0.3s ease;
-        }
-
-        .logo:hover {
-            transform: scale(1.06);
-
-            text-shadow:
-                0 0 15px #00b7ff,
-                0 0 35px #005b96;
-        }
-
-
-        /* =========================
-           MENU E AÇÕES
-        ========================= */
-
-        .header-actions {
-            display: flex;
-            align-items: center;
-            gap: 25px;
-        }
-
-        .menu {
-            display: flex;
-            gap: 30px;
-            list-style: none;
-        }
-
-
-        .menu a {
-            color: white;
-            text-decoration: none;
-            font-weight: bold;
-
-            position: relative;
-
-            transition: color 0.3s ease;
-        }
-
-
-        .menu a::after {
-            content: "";
-
-            position: absolute;
-
-            width: 0;
-            height: 2px;
-
-            background: #ffd200;
-
-            left: 50%;
-            bottom: -6px;
-
-            transition:
-                width 0.3s ease,
-                left 0.3s ease;
-        }
-
-
-        .menu a:hover {
-            color: #ffd200;
-        }
-
-
-        .menu a:hover::after {
-            width: 100%;
-            left: 0;
-        }
-
-
-        /* =========================
-           BOTÃO TEMA (WHITE/DARK)
-        ========================= */
-
-        .theme-toggle {
-            background: rgba(255, 255, 255, 0.12);
-            border: 1px solid rgba(255, 255, 255, 0.25);
-            color: #ffd200;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            font-size: 18px;
-            transition: transform 0.3s ease, background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .theme-toggle:hover {
-            transform: scale(1.12) rotate(15deg);
-            background: rgba(255, 255, 255, 0.25);
-            box-shadow: 0 0 15px rgba(255, 210, 0, 0.5);
-        }
-
-
-        /* =========================
-           CONTEÚDO
-        ========================= */
-
-        main {
-            width: 84%;
-            max-width: 1200px;
-            margin: 35px auto;
-        }
-
-
-        /* =========================
-           BANNER
-        ========================= */
-
-        .banner {
-            min-height: 280px;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            border-radius: 20px;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    #003b63,
-                    #000814,
-                    #001d35
-                );
-
-            box-shadow:
-                0 10px 40px rgba(0, 91, 150, 0.35);
-
-            position: relative;
-            overflow: hidden;
-
-            border:
-                1px solid rgba(0, 183, 255, 0.25);
-
-            animation:
-                bannerEntrada 1s ease;
-
-            transition: box-shadow 0.3s ease, border-color 0.3s ease;
-        }
-
-        .banner img {
-            width: 100%;
-            height: 380px;
-            object-fit: cover;
-            border-radius: 20px;
-            display: block;
-        }
-
-
-        /* =========================
-           TÍTULOS
-        ========================= */
-
-        .section-title {
-            text-align: center;
-            margin: 45px 0 25px;
-        }
-
-
-        .section-title h2 {
-            color: #00aaff;
-            font-size: 32px;
-
-            text-shadow:
-                0 0 15px rgba(0, 170, 255, 0.4);
-
-            transition: color 0.3s ease, text-shadow 0.3s ease;
-        }
-
-
-        .section-title p {
-            color: #888;
-            margin-top: 8px;
-            transition: color 0.3s ease;
-        }
-
-
-        /* =========================
-           CARDS
-        ========================= */
-
-        .cards {
-            display: grid;
-
-            grid-template-columns:
-                repeat(3, 1fr);
-
-            gap: 25px;
-
-            margin: 30px 0;
-        }
-
-
-        .card {
-            background:
-                linear-gradient(
-                    145deg,
-                    #111,
-                    #050505
-                );
-
-            padding: 30px 25px 35px;
-
-            border-radius: 15px;
-
-            text-align: center;
-
-            box-shadow:
-                0 5px 25px rgba(0, 0, 0, 0.7);
-
-            border-top:
-                5px solid #005b96;
-
-            border-left:
-                1px solid rgba(255, 255, 255, 0.05);
-
-            border-right:
-                1px solid rgba(255, 255, 255, 0.05);
-
-            transition:
-                transform 0.4s ease,
-                box-shadow 0.4s ease,
-                border-color 0.4s ease,
-                background 0.3s ease;
-
-            position: relative;
-
-            overflow: hidden;
-
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-
-        /* =========================
-           ÍCONE DO CURSO
-        ========================= */
-
-        .course-icon {
-            width: 85px;
-            height: 85px;
-
-            margin: 0 auto 20px;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            border-radius: 22px;
-
-            font-size: 44px;
-
-            background:
-                rgba(0, 140, 255, 0.12);
-
-            border:
-                1px solid rgba(0, 170, 255, 0.25);
-
-            box-shadow:
-                0 0 25px rgba(0, 140, 255, 0.15);
-
-            position: relative;
-            z-index: 1;
-
-            transition:
-                transform 0.4s ease,
-                box-shadow 0.4s ease;
-        }
-
-
-        .card:hover .course-icon {
-            transform:
-                translateY(-5px)
-                scale(1.12);
-
-            box-shadow:
-                0 0 30px currentColor;
-        }
-
-
-        /* Cores dos ícones */
-
-        .card:nth-child(1) .course-icon {
-            color: #42b883;
-            background: rgba(66, 184, 131, 0.12);
-            border-color: rgba(66, 184, 131, 0.3);
-        }
-
-
-        .card:nth-child(2) .course-icon {
-            color: #ffd200;
-            background: rgba(255, 210, 0, 0.12);
-        }
-
-
-        .card:nth-child(3) .course-icon {
-            color: #ea580c;
-            background: rgba(234, 88, 12, 0.12);
-        }
-
-
-        .card:nth-child(4) .course-icon {
-            color: #00c853;
-            background: rgba(0, 200, 83, 0.12);
-        }
-
-
-        .card:nth-child(5) .course-icon {
-            color: #b56cff;
-            background: rgba(142, 68, 173, 0.12);
-        }
-
-
-        .card:nth-child(6) .course-icon {
-            color: #ff7b00;
-            background: rgba(255, 123, 0, 0.12);
-        }
-
-
-        /* =========================
-           EFEITO DO CARD
-        ========================= */
-
-        .card::before {
-            content: "";
-
-            position: absolute;
-
-            width: 120px;
-            height: 120px;
-
-            background:
-                rgba(0, 140, 255, 0.08);
-
-            border-radius: 50%;
-
-            top: -60px;
-            right: -60px;
-
-            transition: 0.5s ease;
-        }
-
-
-        .card:hover::before {
-            transform: scale(2.5);
-        }
-
-
-        .card:hover {
-            transform:
-                translateY(-10px)
-                scale(1.02);
-
-            box-shadow:
-                0 15px 45px rgba(0, 110, 255, 0.25);
-        }
-
-        .card:nth-child(1) {
-            border-top-color: #42b883;
-        }
-
-        .card:nth-child(1):hover {
-            box-shadow:
-                0 15px 45px rgba(66, 184, 131, 0.3);
-        }
-
-        .card:nth-child(2) {
-            border-top-color: #ffd200;
-        }
-
-        .card:nth-child(2):hover {
-            box-shadow:
-                0 15px 45px rgba(255, 210, 0, 0.2);
-        }
-
-
-        .card:nth-child(3) {
-            border-top-color: #ea580c;
-        }
-
-        .card:nth-child(3):hover {
-            box-shadow:
-                0 15px 45px rgba(234, 88, 12, 0.25);
-        }
-
-
-        .card:nth-child(4) {
-            border-top-color: #00c853;
-        }
-
-
-        .card:nth-child(5) {
-            border-top-color: #8e44ad;
-        }
-
-
-        .card:nth-child(6) {
-            border-top-color: #ff7b00;
-        }
-
-
-        /* =========================
-           TÍTULO DOS CARDS
-        ========================= */
-
-        .card h2 {
-            font-size: 28px;
-            margin-bottom: 15px;
-
-            color: #00aaff;
-
-            position: relative;
-            z-index: 1;
-
-            transition: 0.3s ease;
-        }
-
-
-        .card:hover h2 {
-            transform: scale(1.08);
-
-            text-shadow:
-                0 0 15px currentColor;
-        }
-
-
-        .card:nth-child(1) h2 {
-            color: #42b883;
-        }
-
-
-        .card:nth-child(2) h2 {
-            color: #ffd200;
-        }
-
-
-        .card:nth-child(3) h2 {
-            color: #ea580c;
-        }
-
-
-        .card:nth-child(4) h2 {
-            color: #00c853;
-        }
-
-
-        .card:nth-child(5) h2 {
-            color: #b56cff;
-        }
-
-
-        .card:nth-child(6) h2 {
-            color: #ff7b00;
-        }
-
-
-        .card p {
-            color: #aaa;
-
-            margin-bottom: 25px;
-
-            position: relative;
-            z-index: 1;
-
-            transition: color 0.3s ease;
-        }
-
-
-        /* =========================
-           BOTÕES DOS CARDS
-        ========================= */
-
-        .card button,
-        .card a.btn-assistir {
-            border: none;
-
-            background: #005b96;
-            color: white;
-
-            padding: 12px 28px;
-
-            border-radius: 25px;
-
-            cursor: pointer;
-
-            font-weight: bold;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-            font-size: 15px;
-
-            transition:
-                transform 0.3s ease,
-                filter 0.3s ease,
-                box-shadow 0.3s ease,
-                background 0.3s ease;
-
-            position: relative;
-            z-index: 1;
-        }
-
-        .card-btn-group {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            flex-wrap: wrap;
-            width: 100%;
-            position: relative;
-            z-index: 1;
-        }
-
-        .card-btn-group a.btn-assistir {
-            padding: 10px 18px;
-            font-size: 14px;
-        }
-
-
-        /* Card 1: Vue (link para a playlist) */
-        .card:nth-child(1) a.btn-assistir {
-            background: #1b8352;
-        }
-
-        .card:nth-child(1) a.btn-assistir:hover {
-            background: #156d43;
-            box-shadow: 0 0 20px rgba(66, 184, 131, 0.6);
-        }
-
-        .card:nth-child(2) button,
-        .card:nth-child(2) a.btn-assistir {
-            background: #c69a00;
-        }
-
-        .card:nth-child(2) a.btn-assistir:hover {
-            background: #a88200;
-            box-shadow: 0 0 20px rgba(255, 210, 0, 0.6);
-        }
-
-
-        .card:nth-child(3) button,
-        .card:nth-child(3) a.btn-assistir {
-            background: #ea580c;
-        }
-
-        .card:nth-child(3) a.btn-assistir:hover {
-            background: #c2410c;
-            box-shadow: 0 0 20px rgba(234, 88, 12, 0.6);
-        }
-
-
-        .card:nth-child(4) button {
-            background: #008f3c;
-        }
-
-
-        .card:nth-child(5) button {
-            background: #7b2cbf;
-        }
-
-
-        .card:nth-child(6) button {
-            background: #d96500;
-        }
-
-
-        .card button:hover,
-        .card a.btn-assistir:hover {
-            transform: scale(1.08);
-
-            filter: brightness(1.2);
-
-            box-shadow:
-                0 0 20px currentColor;
-        }
-
-
-        .card button:active,
-        .card a.btn-assistir:active {
-            transform: scale(0.95);
-        }
-
-
-        /* =========================
-           INFORMAÇÕES
-        ========================= */
-
-        .info-section {
-            margin: 55px 0;
-        }
-
-
-        .info-grid {
-            display: grid;
-
-            grid-template-columns:
-                repeat(2, 1fr);
-
-            gap: 20px;
-        }
-
-
-        .info-box {
-            background:
-                linear-gradient(
-                    145deg,
-                    #0d0d0d,
-                    #050505
-                );
-
-            border:
-                1px solid rgba(0, 170, 255, 0.15);
-
-            border-radius: 14px;
-
-            padding: 25px;
-
-            transition:
-                transform 0.3s ease,
-                border-color 0.3s ease,
-                box-shadow 0.3s ease,
-                background 0.3s ease;
-        }
-
-
-        .info-box:hover {
-            transform: translateY(-5px);
-
-            border-color:
-                rgba(0, 170, 255, 0.5);
-
-            box-shadow:
-                0 10px 30px rgba(0, 140, 255, 0.12);
-        }
-
-
-        .info-box h3 {
-            color: #00aaff;
-            margin-bottom: 10px;
-            transition: color 0.3s ease;
-        }
-
-
-        .info-box p {
-            color: #999;
-            transition: color 0.3s ease;
-        }
-
-
-        /* =========================
-           ESTATÍSTICAS
-        ========================= */
-
-        .stats {
-            display: grid;
-
-            grid-template-columns:
-                repeat(4, 1fr);
-
-            gap: 15px;
-
-            margin: 45px 0;
-        }
-
-
-        .stat {
-            text-align: center;
-
-            padding: 25px 15px;
-
-            background: #080808;
-
-            border-radius: 12px;
-
-            border-bottom:
-                3px solid #005b96;
-
-            transition: 0.3s ease;
-        }
-
-
-        .stat:hover {
-            transform: translateY(-5px);
-
-            border-bottom-color:
-                #ffd200;
-        }
-
-
-        .stat strong {
-            display: block;
-
-            color: #00aaff;
-
-            font-size: 30px;
-            transition: color 0.3s ease;
-        }
-
-
-        .stat span {
-            color: #888;
-            font-size: 13px;
-            transition: color 0.3s ease;
-        }
-
-
-        /* =========================
-           MODAL
-        ========================= */
-
-        .video-modal {
-            display: none;
-
-            position: fixed;
-
-            inset: 0;
-
-            background:
-                rgba(0, 0, 0, 0.90);
-
-            align-items: center;
-            justify-content: center;
-
-            padding: 20px;
-
-            z-index: 2000;
-
-            backdrop-filter:
-                blur(8px);
-        }
-
-
-        .video-modal.active {
-            display: flex;
-        }
-
-
-        .modal-content {
-            width: 100%;
-            max-width: 850px;
-
-            background: #0a0a0a;
-
-            color: white;
-
-            border-radius: 18px;
-
-            padding: 30px;
-
-            position: relative;
-
-            border:
-                1px solid rgba(0, 170, 255, 0.3);
-
-            box-shadow:
-                0 0 50px rgba(0, 100, 255, 0.2);
-
-            animation:
-                aparecer 0.3s ease;
-
-            transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-        }
-
-
-        .modal-content h2 {
-            color: #00aaff;
-
-            margin-bottom: 20px;
-
-            text-shadow:
-                0 0 15px rgba(0, 170, 255, 0.5);
-
-            transition: color 0.3s ease;
-        }
-
-
-        /* =========================
-           BOTÃO FECHAR
-        ========================= */
-
-        .close {
-            position: absolute;
-
-            top: 15px;
-            right: 20px;
-
-            width: 40px;
-            height: 40px;
-
-            border: none;
-
-            border-radius: 50%;
-
-            background: #e30613;
-            color: white;
-
-            font-size: 25px;
-
-            cursor: pointer;
-
-            transition: 0.3s ease;
-        }
-
-
-        .close:hover {
-            transform:
-                rotate(90deg)
-                scale(1.1);
-
-            background: #b9000e;
-
-            box-shadow:
-                0 0 20px #e30613;
-        }
-
-
-        /* =========================
-           PLAYER
-        ========================= */
-
-        .video-container {
-            width: 100%;
-
-            aspect-ratio: 16 / 9;
-
-            background: #000;
-
-            border-radius: 10px;
-
-            overflow: hidden;
-
-            box-shadow:
-                0 0 25px rgba(0, 0, 0, 0.8);
-        }
-
-
-        #youtubePlayer {
-            width: 100%;
-            height: 100%;
-
-            display: block;
-
-            border: none;
-        }
-
-
-        /* =========================
-           RODAPÉ
-        ========================= */
-
-        footer {
-            margin-top: 60px;
-
-            background: #050505;
-
-            color: white;
-
-            text-align: center;
-
-            padding: 30px 20px;
-
-            border-top:
-                1px solid rgba(0, 140, 255, 0.2);
-
-            box-shadow:
-                0 -5px 25px rgba(0, 0, 0, 0.7);
-
-            transition: background 0.3s ease, border-color 0.3s ease, color 0.3s ease;
-        }
-
-
-        footer p {
-            font-weight: bold;
-
-            letter-spacing: 2px;
-
-            color: #00aaff;
-
-            text-shadow:
-                0 0 10px #005b96;
-            font-size: 18px;
-            transition: color 0.3s ease;
-        }
-
-
-        footer span {
-            display: block;
-
-            margin-top: 8px;
-
-            color: #888;
-
-            font-size: 13px;
-            transition: color 0.3s ease;
-        }
-
-
-        /* ===================================================
-           WHITE MODE / TEMA CLARO
-        =================================================== */
-
-        body.white-mode {
-            background: #f4f6f9;
-            color: #1e293b;
-        }
-
-        body.white-mode header {
-            background: rgba(255, 255, 255, 0.96);
-            color: #0f172a;
-            border-bottom: 1px solid rgba(0, 91, 150, 0.15);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-        }
-
-        body.white-mode .logo {
-            color: #003b63;
-            text-shadow: none;
-        }
-
-        body.white-mode .logo span {
-            color: #0077cc;
-        }
-
-        body.white-mode .logo:hover {
-            text-shadow: 0 0 15px rgba(0, 119, 204, 0.3);
-        }
-
-        body.white-mode .menu a {
-            color: #334155;
-        }
-
-        body.white-mode .menu a:hover {
-            color: #005b96;
-        }
-
-        body.white-mode .menu a::after {
-            background: #005b96;
-        }
-
-        body.white-mode .theme-toggle {
-            background: rgba(0, 91, 150, 0.08);
-            border: 1px solid rgba(0, 91, 150, 0.2);
-            color: #005b96;
-        }
-
-        body.white-mode .theme-toggle:hover {
-            background: rgba(0, 91, 150, 0.16);
-            box-shadow: 0 0 15px rgba(0, 91, 150, 0.25);
-        }
-
-        body.white-mode .banner {
-            box-shadow: 0 10px 35px rgba(0, 91, 150, 0.15);
-            border: 1px solid rgba(0, 91, 150, 0.15);
-        }
-
-        body.white-mode .section-title h2 {
-            color: #005b96;
-            text-shadow: none;
-        }
-
-        body.white-mode .section-title p {
-            color: #64748b;
-        }
-
-        body.white-mode .card {
-            background: #ffffff;
-            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.06);
-            border-left: 1px solid #e2e8f0;
-            border-right: 1px solid #e2e8f0;
-            border-bottom: 1px solid #e2e8f0;
-        }
-
-        body.white-mode .card::before {
-            background: rgba(0, 119, 204, 0.04);
-        }
-
-        body.white-mode .card:hover {
-            box-shadow: 0 15px 35px rgba(0, 91, 150, 0.15);
-        }
-
-        body.white-mode .card:nth-child(1):hover {
-            box-shadow: 0 15px 35px rgba(27, 131, 82, 0.2);
-        }
-
-        body.white-mode .card:nth-child(2):hover {
-            box-shadow: 0 15px 35px rgba(198, 154, 0, 0.2);
-        }
-
-        body.white-mode .card:nth-child(3):hover {
-            box-shadow: 0 15px 35px rgba(234, 88, 12, 0.2);
-        }
-
-        body.white-mode .card:nth-child(4):hover {
-            box-shadow: 0 15px 35px rgba(0, 143, 60, 0.2);
-        }
-
-        body.white-mode .card:nth-child(5):hover {
-            box-shadow: 0 15px 35px rgba(123, 44, 191, 0.2);
-        }
-
-        body.white-mode .card:nth-child(6):hover {
-            box-shadow: 0 15px 35px rgba(217, 101, 0, 0.2);
-        }
-
-        body.white-mode .card h2 {
-            text-shadow: none;
-        }
-
-        body.white-mode .card:hover h2 {
-            text-shadow: none;
-        }
-
-        body.white-mode .card:nth-child(1) h2 {
-            color: #1b8352;
-        }
-
-        body.white-mode .card:nth-child(2) h2 {
-            color: #b08500;
-        }
-
-        body.white-mode .card:nth-child(3) h2 {
-            color: #c2410c;
-        }
-
-        body.white-mode .card:nth-child(4) h2 {
-            color: #008f3c;
-        }
-
-        body.white-mode .card:nth-child(5) h2 {
-            color: #7b2cbf;
-        }
-
-        body.white-mode .card:nth-child(6) h2 {
-            color: #d96500;
-        }
-
-        body.white-mode .card p {
-            color: #64748b;
-        }
-
-        body.white-mode .info-box {
-            background: #ffffff;
-            border: 1px solid #e2e8f0;
-            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04);
-        }
-
-        body.white-mode .info-box:hover {
-            border-color: rgba(0, 119, 204, 0.4);
-            box-shadow: 0 10px 25px rgba(0, 91, 150, 0.1);
-        }
-
-        body.white-mode .info-box h3 {
-            color: #005b96;
-        }
-
-        body.white-mode .info-box p {
-            color: #64748b;
-        }
-
-        body.white-mode .stat {
-            background: #ffffff;
-            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04);
-            border-bottom: 3px solid #005b96;
-        }
-
-        body.white-mode .stat:hover {
-            border-bottom-color: #ffd200;
-        }
-
-        body.white-mode .stat strong {
-            color: #005b96;
-        }
-
-        body.white-mode .stat span {
-            color: #64748b;
-        }
-
-        body.white-mode .modal-content {
-            background: #ffffff;
-            color: #1e293b;
-            border: 1px solid #cbd5e1;
-            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
-        }
-
-        body.white-mode .modal-content h2 {
-            color: #005b96;
-            text-shadow: none;
-        }
-
-        body.white-mode footer {
-            background: #ffffff;
-            color: #334155;
-            border-top: 1px solid #e2e8f0;
-            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.04);
-        }
-
-        body.white-mode footer p {
-            color: #005b96;
-            text-shadow: none;
-        }
-
-        body.white-mode footer span {
-            color: #64748b;
-        }
-
-
-        /* =========================
-           ANIMAÇÕES
-        ========================= */
-
-        @keyframes bannerEntrada {
-
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-
-        @keyframes aparecer {
-
-            from {
-                opacity: 0;
-                transform: scale(0.9);
-            }
-
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-
-        /* =========================
-           RESPONSIVIDADE
-        ========================= */
-
-        @media (max-width: 768px) {
-
-            header {
-                padding: 15px 5%;
-
-                flex-direction: column;
-
-                gap: 15px;
-            }
-
-
-            .header-actions {
-                width: 100%;
-                justify-content: space-between;
-            }
-
-            .menu {
-                gap: 18px;
-            }
-
-
-            main {
-                width: 90%;
-            }
-
-
-            .banner {
-                min-height: 220px;
-            }
-
-            .banner img {
-                height: 240px;
-            }
-
-            .cards {
-                grid-template-columns: 1fr;
-            }
-
-
-            .info-grid {
-                grid-template-columns: 1fr;
-            }
-
-
-            .stats {
-                grid-template-columns:
-                    repeat(2, 1fr);
-            }
-
-
-            .modal-content {
-                padding: 22px;
-            }
-
-        }
-
-
-        @media (max-width: 480px) {
-
-            .logo {
-                font-size: 25px;
-            }
-
-
-            .menu {
-                gap: 10px;
-            }
-
-
-            .menu a {
-                font-size: 13px;
-            }
-
-
-            .banner {
-                min-height: 180px;
-            }
-
-            .banner img {
-                height: 190px;
-            }
-
-            .card {
-                padding: 30px 20px;
-            }
-
-
-            .course-icon {
-                width: 75px;
-                height: 75px;
-                font-size: 38px;
-            }
-
-
-            .stats {
-                grid-template-columns: 1fr;
-            }
-
-
-            .modal-content {
-                padding: 20px 15px;
-            }
-
-        }
-
     </style>
-
 </head>
 
+<body class="min-h-screen overflow-x-hidden bg-[#0b1329] font-sans text-gray-100 antialiased selection:bg-sky-500 selection:text-white [&_*:focus-visible]:outline-2 [&_*:focus-visible]:outline-sky-300 [&_*:focus-visible]:outline-offset-[3px]">
 
-<body>
+    <!-- ==========================================
+         BACKGROUND DINÂMICO (GRID + PARTÍCULAS SVG)
+    =========================================== -->
+    <div aria-hidden="true" class="pointer-events-none fixed inset-0 z-0 overflow-hidden bg-gradient-to-br from-[#071323] via-[#0b1d33] to-[#101a35]">
+        <!-- Malha Blueprint Técnica -->
+        <div class="absolute inset-0 opacity-30 [background-image:linear-gradient(rgba(125,211,252,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(125,211,252,0.08)_1px,transparent_1px)] [background-size:56px_56px]"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#071323]/70"></div>
 
+        <!-- Constelação de Partículas Flutuantes em SVG -->
+        <svg aria-hidden="true" class="absolute inset-0 h-full w-full motion-reduce:hidden" viewBox="0 0 1440 900" preserveAspectRatio="none">
+            <defs>
+                <filter id="particle-glow" x="-200%" y="-200%" width="500%" height="500%">
+                    <feGaussianBlur stdDeviation="3" result="glow"></feGaussianBlur>
+                    <feMerge>
+                        <feMergeNode in="glow"></feMergeNode>
+                        <feMergeNode in="SourceGraphic"></feMergeNode>
+                    </feMerge>
+                </filter>
+            </defs>
+            <circle r="2.5" fill="#67e8f9" filter="url(#particle-glow)">
+                <animateMotion dur="18s" repeatCount="indefinite" path="M -20 160 C 240 30 430 330 720 180 S 1170 80 1460 250"></animateMotion>
+                <animate attributeName="opacity" values="0;1;0.75;0" keyTimes="0;0.15;0.8;1" dur="18s" repeatCount="indefinite"></animate>
+            </circle>
+            <circle r="2" fill="#bae6fd" filter="url(#particle-glow)">
+                <animateMotion dur="23s" repeatCount="indefinite" path="M 140 -20 C 320 220 40 520 340 930"></animateMotion>
+                <animate attributeName="opacity" values="0;0.9;0.65;0" keyTimes="0;0.2;0.8;1" dur="23s" repeatCount="indefinite"></animate>
+            </circle>
+            <circle r="2.5" fill="#22d3ee" filter="url(#particle-glow)">
+                <animateMotion dur="21s" repeatCount="indefinite" path="M 1480 100 C 1190 300 1020 560 720 930"></animateMotion>
+                <animate attributeName="opacity" values="0;1;0.7;0" keyTimes="0;0.15;0.8;1" dur="21s" repeatCount="indefinite"></animate>
+            </circle>
+            <circle r="2" fill="#fde68a" filter="url(#particle-glow)">
+                <animateMotion dur="26s" repeatCount="indefinite" path="M -30 600 C 250 430 500 720 780 570 S 1190 450 1470 700"></animateMotion>
+                <animate attributeName="opacity" values="0;0.9;0.6;0" keyTimes="0;0.2;0.8;1" dur="26s" repeatCount="indefinite"></animate>
+            </circle>
+            <circle r="2.5" fill="#e0f2fe" filter="url(#particle-glow)">
+                <animateMotion dur="20s" repeatCount="indefinite" path="M 1470 820 C 1130 650 920 850 640 640 S 250 780 -30 520"></animateMotion>
+                <animate attributeName="opacity" values="0;1;0.7;0" keyTimes="0;0.15;0.8;1" dur="20s" repeatCount="indefinite"></animate>
+            </circle>
+            <circle r="2" fill="#67e8f9" filter="url(#particle-glow)">
+                <animateMotion dur="25s" repeatCount="indefinite" path="M 470 -30 C 700 200 400 460 700 650 S 1030 760 960 930"></animateMotion>
+                <animate attributeName="opacity" values="0;0.9;0.65;0" keyTimes="0;0.2;0.8;1" dur="25s" repeatCount="indefinite"></animate>
+            </circle>
+            <circle r="1.5" fill="#a5f3fc" filter="url(#particle-glow)">
+                <animateMotion dur="16s" repeatCount="indefinite" path="M -20 320 C 300 200 520 430 800 300 S 1180 250 1460 380"></animateMotion>
+                <animate attributeName="opacity" values="0;0.85;0.55;0" keyTimes="0;0.2;0.8;1" dur="16s" repeatCount="indefinite"></animate>
+            </circle>
+            <circle r="2" fill="#67e8f9" filter="url(#particle-glow)">
+                <animateMotion dur="22s" repeatCount="indefinite" path="M 1460 460 C 1160 280 980 530 700 430 S 250 360 -20 500"></animateMotion>
+                <animate attributeName="opacity" values="0;0.9;0.6;0" keyTimes="0;0.2;0.8;1" dur="22s" repeatCount="indefinite"></animate>
+            </circle>
+            <circle r="1.5" fill="#cbd5e1" filter="url(#particle-glow)">
+                <animateMotion dur="19s" repeatCount="indefinite" path="M 300 930 C 430 680 200 480 430 260 S 660 100 610 -20"></animateMotion>
+                <animate attributeName="opacity" values="0;0.8;0.55;0" keyTimes="0;0.2;0.8;1" dur="19s" repeatCount="indefinite"></animate>
+            </circle>
+            <circle r="2" fill="#fde68a" filter="url(#particle-glow)">
+                <animateMotion dur="24s" repeatCount="indefinite" path="M 900 -20 C 720 220 1060 340 900 560 S 720 760 840 930"></animateMotion>
+                <animate attributeName="opacity" values="0;0.9;0.6;0" keyTimes="0;0.2;0.8;1" dur="24s" repeatCount="indefinite"></animate>
+            </circle>
+            <circle r="1.5" fill="#bae6fd" filter="url(#particle-glow)">
+                <animateMotion dur="17s" repeatCount="indefinite" path="M -20 760 C 260 840 470 620 720 760 S 1180 900 1460 740"></animateMotion>
+                <animate attributeName="opacity" values="0;0.85;0.55;0" keyTimes="0;0.2;0.8;1" dur="17s" repeatCount="indefinite"></animate>
+            </circle>
+            <circle r="2" fill="#22d3ee" filter="url(#particle-glow)">
+                <animateMotion dur="27s" repeatCount="indefinite" path="M 1100 930 C 950 720 1260 580 1090 360 S 880 120 1040 -20"></animateMotion>
+                <animate attributeName="opacity" values="0;0.9;0.65;0" keyTimes="0;0.2;0.8;1" dur="27s" repeatCount="indefinite"></animate>
+            </circle>
+        </svg>
+    </div>
 
-    <!-- =========================
-         CABEÇALHO
-    ========================= -->
+    <!-- ==========================================
+         ESTRUTURA PRINCIPAL
+    =========================================== -->
+    <div class="relative z-10 flex min-h-screen flex-col">
 
-    <header>
+        <!-- ==========================================
+             HEADER / NAVBAR GLASSMORPHISM (OTIMIZADO 320PX)
+        =========================================== -->
+        <header class="fixed top-0 left-0 right-0 z-50 border-b border-[rgba(148,190,219,0.14)] bg-[rgba(5,15,29,0.9)] shadow-[0_12px_36px_rgba(2,8,23,0.25)] backdrop-blur-xl">
+            <nav class="mx-auto flex max-w-7xl items-center justify-between px-3 sm:px-6 py-2.5 sm:py-3.5">
 
-        <a href="#inicio" class="logo">
-            <i class="fa-brands fa-youtube"></i> DevTube <span>SENAI</span>
-        </a>
+                <!-- Logo DevTube / SENAI -->
+                <a href="#inicio" class="flex items-center gap-2 sm:gap-3 group">
+                    <div class="inline-flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 bg-[#005CA9] text-white rounded-lg sm:rounded-xl border border-sky-300/30 shadow-md group-hover:scale-105 transition-transform shrink-0">
+                        <i class="fab fa-youtube text-red-400 text-base sm:text-xl filter drop-shadow"></i>
+                    </div>
+                    <div class="min-w-0">
+                        <p class="bg-gradient-to-b from-white via-slate-200 to-slate-400 bg-clip-text text-base sm:text-xl font-black leading-tight text-transparent drop-shadow truncate">
+                            DEVTUBE <span class="text-sky-400">SENAI</span>
+                        </p>
+                        <p class="text-[9px] sm:text-[10px] font-semibold uppercase tracking-[.15em] text-sky-200/80 truncate">
+                            SENAI DEV TEAM
+                        </p>
+                    </div>
+                </a>
 
-        <div class="header-actions">
+                <!-- Navegação Desktop -->
+                <div class="hidden md:flex items-center gap-2">
+                    <a href="#inicio" class="px-3 py-1.5 text-xs font-semibold text-gray-200 hover:text-white rounded-lg hover:bg-white/10 transition-colors">
+                        Início
+                    </a>
+                    <a href="#funis" class="px-3 py-1.5 text-xs font-semibold text-gray-200 hover:text-white rounded-lg hover:bg-white/10 transition-colors">
+                        Funis Gamificados
+                    </a>
+                    <a href="#ecossistema" class="px-3 py-1.5 text-xs font-semibold text-gray-200 hover:text-white rounded-lg hover:bg-white/10 transition-colors">
+                        Ecossistema da Turma
+                    </a>
+                    <a href="#competencias" class="px-3 py-1.5 text-xs font-semibold text-gray-200 hover:text-white rounded-lg hover:bg-white/10 transition-colors">
+                        Competências
+                    </a>
+                    <a href="https://cursodevsenai.vercel.app/" target="_blank" rel="noopener noreferrer"
+                        class="ml-2 inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-sky-300 bg-sky-500/10 hover:bg-sky-500/20 border border-sky-400/30 rounded-xl transition-all shadow-sm">
+                        <i class="fas fa-arrow-left text-[10px]"></i>
+                        <span>Portal do Curso</span>
+                    </a>
+                </div>
 
-            <nav aria-label="Menu principal">
-
-                <ul class="menu">
-
-                    <li>
-                        <a href="#inicio">
-                            Início
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="#cursos">
-                            Cursos
-                        </a>
-                    </li>
-
-                    <li>
-                        <a href="#tecnologia">
-                            Tecnologia
-                        </a>
-                    </li>
-
-                </ul>
+                <!-- Dropdown Mobile / Telas Menores -->
+                <div class="relative inline-block text-left group md:hidden shrink-0">
+                    <button class="inline-flex items-center gap-1 px-2.5 py-1 text-xs font-semibold text-white bg-white/10 hover:bg-white/20 border border-white/15 rounded-lg transition-all">
+                        <i class="fas fa-compass text-sky-400 text-xs"></i>
+                        <span>Menu</span>
+                        <i class="fas fa-chevron-down text-[9px] text-sky-200"></i>
+                    </button>
+                    <div class="absolute right-0 w-48 pt-2 origin-top-right transition-all duration-200 opacity-0 invisible scale-95 group-hover:opacity-100 group-hover:visible group-hover:scale-100 z-50">
+                        <div class="bg-slate-900/98 backdrop-blur-2xl border border-white/15 rounded-xl shadow-2xl p-1.5 text-xs space-y-0.5">
+                            <a href="#inicio" class="flex items-center gap-2 px-2.5 py-2 text-gray-200 rounded-lg hover:bg-white/10 hover:text-white">
+                                <i class="fas fa-home text-sky-400 w-4"></i> Início
+                            </a>
+                            <a href="#funis" class="flex items-center gap-2 px-2.5 py-2 text-gray-200 rounded-lg hover:bg-white/10 hover:text-white">
+                                <i class="fas fa-trophy text-amber-400 w-4"></i> Funis Gamificados
+                            </a>
+                            <a href="#ecossistema" class="flex items-center gap-2 px-2.5 py-2 text-gray-200 rounded-lg hover:bg-white/10 hover:text-white">
+                                <i class="fas fa-network-wired text-emerald-400 w-4"></i> Conexões da Turma
+                            </a>
+                            <a href="#competencias" class="flex items-center gap-2 px-2.5 py-2 text-gray-200 rounded-lg hover:bg-white/10 hover:text-white">
+                                <i class="fas fa-microchip text-cyan-400 w-4"></i> Competências
+                            </a>
+                            <a href="https://cursodevsenai.vercel.app/" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 px-2.5 py-2 text-sky-300 rounded-lg hover:bg-sky-500/20 font-semibold border-t border-white/10 mt-1">
+                                <i class="fas fa-arrow-left text-sky-400 w-4"></i> Portal do Curso
+                            </a>
+                        </div>
+                    </div>
+                </div>
 
             </nav>
+        </header>
 
-            <!-- Botão de Alternância de Tema -->
-            <button
-                type="button"
-                id="themeToggle"
-                class="theme-toggle"
-                aria-label="Alternar tema claro/escuro"
-                title="Alternar tema claro/escuro">
-                <i class="fa-solid fa-moon"></i>
-            </button>
+        <!-- ==========================================
+             CONTEÚDO PRINCIPAL
+        =========================================== -->
+        <main id="inicio" class="flex-1 w-full max-w-7xl mx-auto px-3 sm:px-6 pt-20 sm:pt-24 pb-16">
 
-        </div>
+            <!-- ==========================================
+                 HERO BANNER FLUIDO (100% RESPONSIVO PARA 320PX)
+            =========================================== -->
+            <div class="relative mx-auto mb-10 mt-2 sm:mt-4 w-full max-w-[1024px] overflow-hidden rounded-2xl sm:rounded-[1.75rem] border border-white/10 shadow-2xl bg-gradient-to-br from-red-950/40 via-slate-900/60 to-sky-950/40 py-8 px-4 sm:py-12 sm:px-8 text-center flex flex-col items-center justify-center">
+                <!-- Imagem de Fundo Fluida -->
+                <img src="https://media.licdn.com/dms/image/v2/D4D1BAQFknofuOJsJ-Q/company-background_10000/company-background_10000/0/1658493207949/senai_solues_digitais_cover?e=2147483647&v=beta&t=tm1oWeWoD7iY5KGSVRm32L-gDLeWCZFFiDMN_F_kQeA"
+                    alt="" aria-hidden="true"
+                    class="pointer-events-none absolute inset-0 h-full w-full object-cover opacity-20 mix-blend-luminosity">
 
-    </header>
+                <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#0b1329] via-[#0b1329]/75 to-transparent"></div>
 
+                <!-- Conteúdo do Hero (sem absolute, com fluxo natural) -->
+                <div class="relative z-10 flex flex-col items-center justify-center w-full max-w-2xl">
+                    <div class="inline-flex items-center gap-1.5 px-2.5 py-0.5 sm:px-3 sm:py-1 rounded-full border border-red-400/40 bg-red-500/20 text-red-300 text-[10px] sm:text-xs font-bold mb-2 shadow-sm backdrop-blur-sm">
+                        <i class="fab fa-youtube text-red-400 text-xs sm:text-sm"></i>
+                        <span>HUB DE FUNIS GAMIFICADOS</span>
+                    </div>
 
-    <!-- =========================
-         CONTEÚDO
-    ========================= -->
+                    <h1 class="bg-gradient-to-b from-white via-slate-200 to-slate-400 bg-clip-text text-2xl sm:text-4xl md:text-5xl font-black leading-tight tracking-[.06em] text-transparent drop-shadow-md">
+                        DEVTUBE <span class="text-sky-400">SENAI</span>
+                    </h1>
 
-    <main id="inicio">
+                    <p class="mt-2 inline-flex items-center gap-1.5 sm:gap-2 rounded-full border border-cyan-300/30 bg-[#0b1329]/70 px-2.5 py-0.5 sm:px-3 sm:py-1 text-[9px] sm:text-xs font-extrabold tracking-[.18em] text-cyan-300 shadow-[inset_0_0_12px_rgba(34,211,238,0.12)]">
+                        <span aria-hidden="true" class="h-px w-2.5 sm:w-4 bg-cyan-300/70"></span>
+                        <span>SENAI DEV TEAM</span>
+                        <span aria-hidden="true" class="h-px w-2.5 sm:w-4 bg-cyan-300/70"></span>
+                    </p>
 
+                    <p class="mt-2.5 sm:mt-3 text-xs sm:text-sm md:text-base font-medium leading-relaxed text-slate-200 max-w-lg">
+                        Plataforma de jornadas práticas com avanço sequencial, validação de código por aula, acúmulo de XP e medalhas de desenvolvedor.
+                    </p>
+                </div>
+            </div>
 
-        <!-- BANNER -->
+            <!-- ==========================================
+                 SEÇÃO 1: OS 4 FUNIS GAMIFICADOS OFICIAIS
+            =========================================== -->
+            <div id="funis" class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2.5 mb-6 sm:mb-8 border-b border-white/10 pb-3 sm:pb-4">
+                <div class="flex items-center gap-2.5 sm:gap-3">
+                    <div class="w-9 h-9 sm:w-10 sm:h-10 bg-amber-500 rounded-xl flex items-center justify-center text-white shadow-lg shadow-amber-950/40 border border-amber-300/30 shrink-0">
+                        <i class="fas fa-trophy text-sm sm:text-base"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-xl sm:text-2xl font-extrabold text-white tracking-tight">
+                            Funis Gamificados Oficiais
+                        </h2>
+                        <p class="text-xs text-blue-200/80">
+                            Aprenda na prática: cada aula só é liberada após responder à questão técnica.
+                        </p>
+                    </div>
+                </div>
 
-        <section
-            class="banner"
-            aria-label="Banner principal">
+                <div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full border border-emerald-400/30 bg-emerald-500/10 text-emerald-300 text-[11px] font-semibold self-start sm:self-auto">
+                    <i class="fas fa-unlock-keyhole text-[10px]"></i>
+                    <span>4 Trilhas Ativas com Bloqueio Real</span>
+                </div>
+            </div>
 
-             <img src="https://media.licdn.com/dms/image/v2/D4D1BAQFknofuOJsJ-Q/company-background_10000/company-background_10000/0/1658493207949/senai_solues_digitais_cover?e=2147483647&v=beta&t=tm1oWeWoD7iY5KGSVRm32L-gDLeWCZFFiDMN_F_kQeA" alt="SENAI">
+            <!-- GRID DOS 4 FUNIS (2x2 NO DESKTOP, 1 COLUNA NO MOBILE) -->
+            <section class="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6 mb-16" aria-label="Funis Gamificados de Aprendizado">
 
-        </section>
+                <!-- FUNIL 1: VUE FUNDAMENTOS (EMERALD) -->
+                <article class="group relative flex flex-col justify-between bg-white/10 backdrop-blur-sm rounded-2xl p-4 sm:p-6 border border-emerald-400/30 hover:bg-white/15 hover:border-emerald-400 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-emerald-950/50 overflow-hidden">
+                    <div class="pointer-events-none absolute -right-10 -bottom-10 w-40 h-40 bg-emerald-500/20 rounded-full blur-2xl group-hover:bg-emerald-500/35 transition-all duration-300"></div>
 
+                    <div class="relative z-10 flex flex-col gap-3.5">
+                        <div class="flex items-start justify-between gap-3">
+                            <!-- Ícone de Alto Contraste -->
+                            <div class="w-12 h-12 sm:w-14 sm:h-14 bg-emerald-700/90 rounded-2xl flex items-center justify-center shrink-0 border border-emerald-300/50 text-white shadow-lg shadow-emerald-950/40 group-hover:scale-105 transition-transform">
+                                <i class="devicon-vuejs-plain text-2xl sm:text-3xl text-emerald-300 filter drop-shadow"></i>
+                            </div>
+                            <span class="inline-flex items-center gap-1 text-[10px] sm:text-[11px] font-bold text-emerald-300 bg-emerald-500/20 px-2.5 py-1 rounded-full border border-emerald-500/30">
+                                <i class="fas fa-medal text-amber-300 text-[10px]"></i> Trilha Fundamentos
+                            </span>
+                        </div>
 
-        <!-- =========================
-             CURSOS
-        ========================= -->
+                        <div>
+                            <h3 class="text-lg sm:text-xl font-bold text-white group-hover:text-emerald-300 transition-colors">
+                                Vue.js Fundamentos
+                            </h3>
+                            <p class="text-xs sm:text-sm text-blue-100/80 mt-1 leading-relaxed">
+                                Domine reatividade, diretivas, manipulação de formulários com v-model e componentes modulares na prática.
+                            </p>
+                        </div>
 
-        <div
-            class="section-title"
-            id="cursos">
+                        <div class="flex items-center gap-2 text-[10px] sm:text-xs text-emerald-200/90 font-medium">
+                            <span class="inline-flex items-center gap-1 bg-emerald-950/40 px-2 py-0.5 rounded border border-emerald-500/20">
+                                ⚡ XP por Desafio
+                            </span>
+                            <span class="inline-flex items-center gap-1 bg-emerald-950/40 px-2 py-0.5 rounded border border-emerald-500/20">
+                                🎓 Certificado Final
+                            </span>
+                        </div>
+                    </div>
 
-            <h2>
-                Desenvolvimento de Sistemas 
-            </h2>
+                    <div class="relative z-10 mt-5 pt-3.5 border-t border-white/10">
+                        <a href="https://oscarmoraes.github.io/VueGamificado/" target="_blank" rel="noopener noreferrer"
+                            class="bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 transition-all shadow-md group-hover:shadow-emerald-600/30 w-full">
+                            <span>▶ Acessar Funil Vue Fundamentos</span>
+                            <i class="fas fa-arrow-right text-xs group-hover:translate-x-1 transition-transform"></i>
+                        </a>
+                    </div>
+                </article>
 
-            <p>
-                Do código à solução: desenvolva suas habilidades em tecnologia.
+                <!-- FUNIL 2: VUE 3 & COMPOSITION API (TEAL / CYAN) -->
+                <article class="group relative flex flex-col justify-between bg-white/10 backdrop-blur-sm rounded-2xl p-4 sm:p-6 border border-teal-400/30 hover:bg-white/15 hover:border-teal-400 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-teal-950/50 overflow-hidden">
+                    <div class="pointer-events-none absolute -right-10 -bottom-10 w-40 h-40 bg-teal-500/20 rounded-full blur-2xl group-hover:bg-teal-500/35 transition-all duration-300"></div>
+
+                    <div class="relative z-10 flex flex-col gap-3.5">
+                        <div class="flex items-start justify-between gap-3">
+                            <!-- Ícone de Alto Contraste -->
+                            <div class="w-12 h-12 sm:w-14 sm:h-14 bg-teal-700/90 rounded-2xl flex items-center justify-center shrink-0 border border-teal-300/50 text-white shadow-lg shadow-teal-950/40 group-hover:scale-105 transition-transform">
+                                <i class="devicon-vuejs-plain text-2xl sm:text-3xl text-teal-200 filter drop-shadow"></i>
+                            </div>
+                            <span class="inline-flex items-center gap-1 text-[10px] sm:text-[11px] font-bold text-teal-300 bg-teal-500/20 px-2.5 py-1 rounded-full border border-teal-500/30">
+                                <i class="fas fa-crown text-amber-300 text-[10px]"></i> 35 Aulas • 4.220 XP
+                            </span>
+                        </div>
+
+                        <div>
+                            <h3 class="text-lg sm:text-xl font-bold text-white group-hover:text-teal-300 transition-colors">
+                                Vue.js 3 & Composition API
+                            </h3>
+                            <p class="text-xs sm:text-sm text-blue-100/80 mt-1 leading-relaxed">
+                                Formação completa de 35 aulas: Single File Components, Vuex State, Vue Router dinâmico e refatoração com Composition API.
+                            </p>
+                        </div>
+
+                        <div class="flex items-center gap-2 text-[10px] sm:text-xs text-teal-200/90 font-medium">
+                            <span class="inline-flex items-center gap-1 bg-teal-950/40 px-2 py-0.5 rounded border border-teal-500/20">
+                                🎖️ 5 Patentes Dev
+                            </span>
+                            <span class="inline-flex items-center gap-1 bg-teal-950/40 px-2 py-0.5 rounded border border-teal-500/20">
+                                🏆 35 Conquistas
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="relative z-10 mt-5 pt-3.5 border-t border-white/10">
+                        <a href="https://oscarmoraes.github.io/Vue3Gamificado/" target="_blank" rel="noopener noreferrer"
+                            class="bg-teal-600 hover:bg-teal-500 text-white font-bold text-xs py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 transition-all shadow-md group-hover:shadow-teal-600/30 w-full">
+                            <span>▶ Acessar Funil Vue 3 (35 Aulas)</span>
+                            <i class="fas fa-arrow-right text-xs group-hover:translate-x-1 transition-transform"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- FUNIL 3: FLASK & PYTHON BACKEND (AMBER) -->
+                <article class="group relative flex flex-col justify-between bg-white/10 backdrop-blur-sm rounded-2xl p-4 sm:p-6 border border-amber-400/30 hover:bg-white/15 hover:border-amber-400 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-amber-950/50 overflow-hidden">
+                    <div class="pointer-events-none absolute -right-10 -bottom-10 w-40 h-40 bg-amber-500/20 rounded-full blur-2xl group-hover:bg-amber-500/35 transition-all duration-300"></div>
+
+                    <div class="relative z-10 flex flex-col gap-3.5">
+                        <div class="flex items-start justify-between gap-3">
+                            <!-- Ícone de Alto Contraste: Branco puro sobre âmbar escuro -->
+                            <div class="w-12 h-12 sm:w-14 sm:h-14 bg-amber-700/90 rounded-2xl flex items-center justify-center shrink-0 border border-amber-300/50 text-white shadow-lg shadow-amber-950/40 group-hover:scale-105 transition-transform">
+                                <i class="devicon-flask-original text-2xl sm:text-3xl text-white filter drop-shadow"></i>
+                            </div>
+                            <span class="inline-flex items-center gap-1 text-[10px] sm:text-[11px] font-bold text-amber-300 bg-amber-500/20 px-2.5 py-1 rounded-full border border-amber-500/30">
+                                <i class="fas fa-database text-amber-300 text-[10px]"></i> Backend & APIs
+                            </span>
+                        </div>
+
+                        <div>
+                            <h3 class="text-lg sm:text-xl font-bold text-white group-hover:text-amber-300 transition-colors">
+                                Flask & Python Backend
+                            </h3>
+                            <p class="text-xs sm:text-sm text-blue-100/80 mt-1 leading-relaxed">
+                                Crie servidores web do zero, manipule rotas HTTP, templates dinâmicos Jinja2, sessões e arquitetura de APIs com Python.
+                            </p>
+                        </div>
+
+                        <div class="flex items-center gap-2 text-[10px] sm:text-xs text-amber-200/90 font-medium">
+                            <span class="inline-flex items-center gap-1 bg-amber-950/40 px-2 py-0.5 rounded border border-amber-500/20">
+                                🐍 Python Web
+                            </span>
+                            <span class="inline-flex items-center gap-1 bg-amber-950/40 px-2 py-0.5 rounded border border-amber-500/20">
+                                🔌 APIs RESTful
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="relative z-10 mt-5 pt-3.5 border-t border-white/10">
+                        <a href="https://oscarmoraes.github.io/FlaskGamificado/" target="_blank" rel="noopener noreferrer"
+                            class="bg-amber-600 hover:bg-amber-500 text-white font-bold text-xs py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 transition-all shadow-md group-hover:shadow-amber-600/30 w-full">
+                            <span>▶ Acessar Funil Flask & Python</span>
+                            <i class="fas fa-arrow-right text-xs group-hover:translate-x-1 transition-transform"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- FUNIL 4: FILAMENT PHP & LARAVEL (ORANGE) -->
+                <article class="group relative flex flex-col justify-between bg-white/10 backdrop-blur-sm rounded-2xl p-4 sm:p-6 border border-orange-400/30 hover:bg-white/15 hover:border-orange-400 transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl hover:shadow-orange-950/50 overflow-hidden">
+                    <div class="pointer-events-none absolute -right-10 -bottom-10 w-40 h-40 bg-orange-500/20 rounded-full blur-2xl group-hover:bg-orange-500/35 transition-all duration-300"></div>
+
+                    <div class="relative z-10 flex flex-col gap-3.5">
+                        <div class="flex items-start justify-between gap-3">
+                            <!-- Ícone de Alto Contraste: Branco puro sobre laranja escuro -->
+                            <div class="w-12 h-12 sm:w-14 sm:h-14 bg-orange-700/90 rounded-2xl flex items-center justify-center shrink-0 border border-orange-300/50 text-white shadow-lg shadow-orange-950/40 group-hover:scale-105 transition-transform">
+                                <i class="devicon-laravel-plain text-2xl sm:text-3xl text-white filter drop-shadow"></i>
+                            </div>
+                            <span class="inline-flex items-center gap-1 text-[10px] sm:text-[11px] font-bold text-orange-300 bg-orange-500/20 px-2.5 py-1 rounded-full border border-orange-500/30">
+                                <i class="fas fa-chart-line text-amber-300 text-[10px]"></i> 21 Aulas • Dashboards
+                            </span>
+                        </div>
+
+                        <div>
+                            <h3 class="text-lg sm:text-xl font-bold text-white group-hover:text-orange-300 transition-colors">
+                                Filament PHP & Laravel
+                            </h3>
+                            <p class="text-xs sm:text-sm text-blue-100/80 mt-1 leading-relaxed">
+                                Construa painéis administrativos empresariais, formulários reativos, tabelas com filtros e dashboards de alta produtividade.
+                            </p>
+                        </div>
+
+                        <div class="flex items-center gap-2 text-[10px] sm:text-xs text-orange-200/90 font-medium">
+                            <span class="inline-flex items-center gap-1 bg-orange-950/40 px-2 py-0.5 rounded border border-orange-500/20">
+                                📊 Painéis Admin
+                            </span>
+                            <span class="inline-flex items-center gap-1 bg-orange-950/40 px-2 py-0.5 rounded border border-orange-500/20">
+                                🛡️ Autenticação & Roles
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="relative z-10 mt-5 pt-3.5 border-t border-white/10">
+                        <a href="https://oscarmoraes.github.io/FilamentGamificado/" target="_blank" rel="noopener noreferrer"
+                            class="bg-orange-600 hover:bg-orange-500 text-white font-bold text-xs py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 transition-all shadow-md group-hover:shadow-orange-600/30 w-full">
+                            <span>▶ Acessar Funil Filament (21 Aulas)</span>
+                            <i class="fas fa-arrow-right text-xs group-hover:translate-x-1 transition-transform"></i>
+                        </a>
+                    </div>
+                </article>
+
+            </section>
+
+            <!-- ==========================================
+                 SEÇÃO 2: CONEXÕES DO ECOSSISTEMA DA TURMA
+            =========================================== -->
+            <div id="ecossistema" class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2.5 mb-6 sm:mb-8 border-b border-white/10 pb-3 sm:pb-4">
+                <div class="flex items-center gap-2.5 sm:gap-3">
+                    <div class="w-9 h-9 sm:w-10 sm:h-10 bg-indigo-600 rounded-xl flex items-center justify-center text-white shadow-lg shadow-indigo-950/40 border border-indigo-300/30 shrink-0">
+                        <i class="fas fa-network-wired text-sm sm:text-base"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-xl sm:text-2xl font-extrabold text-white tracking-tight">
+                            Ecossistema da Turma SENAI
+                        </h2>
+                        <p class="text-xs text-blue-200/80">
+                            Acesse os projetos, simulados e ferramentas complementares desenvolvidos pelos alunos.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full border border-sky-400/30 bg-sky-500/10 text-sky-300 text-[11px] font-semibold self-start sm:self-auto">
+                    <i class="fas fa-link text-[10px]"></i>
+                    <span>Integrações Diretas</span>
+                </div>
+            </div>
+
+            <!-- GRID DO ECOSSISTEMA (4 CARDS) -->
+            <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 mb-16" aria-label="Ferramentas da Turma">
+
+                <!-- 1. DEVCHECK SIMULADO -->
+                <a href="https://matheussantos-web.github.io/simuladodev/" target="_blank" rel="noopener noreferrer"
+                    class="group relative flex flex-col justify-between bg-white/10 backdrop-blur-sm rounded-xl p-4 sm:p-5 border border-purple-400/30 hover:bg-white/15 hover:border-purple-400 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-purple-950/40 overflow-hidden">
+                    <div class="pointer-events-none absolute -right-8 -bottom-8 w-28 h-28 bg-purple-500/20 rounded-full blur-xl group-hover:bg-purple-500/30 transition-all"></div>
+
+                    <div class="relative z-10 flex flex-col gap-3">
+                        <div class="flex items-center justify-between">
+                            <div class="w-10 h-10 bg-purple-600 rounded-lg flex items-center justify-center text-white shadow-md border border-purple-400/30 group-hover:scale-105 transition-transform">
+                                <i class="fas fa-brain text-lg"></i>
+                            </div>
+                            <span class="text-[10px] font-bold text-purple-300 bg-purple-500/20 px-2 py-0.5 rounded-full border border-purple-500/30">
+                                Treino Prático
+                            </span>
+                        </div>
+                        <div>
+                            <h3 class="text-base font-bold text-white group-hover:text-purple-300 transition-colors">
+                                DevCheck SENAI
+                            </h3>
+                            <p class="text-xs text-blue-100/75 mt-1 leading-relaxed">
+                                Simulado prático de lógica, web e banco de dados para testar seus conhecimentos.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="relative z-10 mt-4 pt-3 border-t border-white/10 flex items-center justify-between text-xs font-semibold text-purple-300 group-hover:text-white">
+                        <span>Acessar Simulado</span>
+                        <i class="fas fa-arrow-right text-[10px] group-hover:translate-x-1 transition-transform"></i>
+                    </div>
+                </a>
+
+                <!-- 2. MURAL DE CURRÍCULOS -->
+                <a href="https://curriculos-turma.vercel.app/" target="_blank" rel="noopener noreferrer"
+                    class="group relative flex flex-col justify-between bg-white/10 backdrop-blur-sm rounded-xl p-4 sm:p-5 border border-emerald-400/30 hover:bg-white/15 hover:border-emerald-400 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-emerald-950/40 overflow-hidden">
+                    <div class="pointer-events-none absolute -right-8 -bottom-8 w-28 h-28 bg-emerald-500/20 rounded-full blur-xl group-hover:bg-emerald-500/30 transition-all"></div>
+
+                    <div class="relative z-10 flex flex-col gap-3">
+                        <div class="flex items-center justify-between">
+                            <div class="w-10 h-10 bg-emerald-600 rounded-lg flex items-center justify-center text-white shadow-md border border-emerald-400/30 group-hover:scale-105 transition-transform">
+                                <i class="fas fa-user-graduate text-lg"></i>
+                            </div>
+                            <span class="text-[10px] font-bold text-emerald-300 bg-emerald-500/20 px-2 py-0.5 rounded-full border border-emerald-500/30">
+                                Portfólio Coletivo
+                            </span>
+                        </div>
+                        <div>
+                            <h3 class="text-base font-bold text-white group-hover:text-emerald-300 transition-colors">
+                                Mural de Currículos
+                            </h3>
+                            <p class="text-xs text-blue-100/75 mt-1 leading-relaxed">
+                                Perfis profissionais, contatos e portfólios no GitHub de todos os alunos da turma.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="relative z-10 mt-4 pt-3 border-t border-white/10 flex items-center justify-between text-xs font-semibold text-emerald-300 group-hover:text-white">
+                        <span>Ver Currículos</span>
+                        <i class="fas fa-arrow-right text-[10px] group-hover:translate-x-1 transition-transform"></i>
+                    </div>
+                </a>
+
+                <!-- 3. SENAI COINS & SHOP -->
+                <a href="https://senaishop.vercel.app/" target="_blank" rel="noopener noreferrer"
+                    class="group relative flex flex-col justify-between bg-white/10 backdrop-blur-sm rounded-xl p-4 sm:p-5 border border-amber-400/30 hover:bg-white/15 hover:border-amber-400 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-amber-950/40 overflow-hidden">
+                    <div class="pointer-events-none absolute -right-8 -bottom-8 w-28 h-28 bg-amber-500/20 rounded-full blur-xl group-hover:bg-amber-500/30 transition-all"></div>
+
+                    <div class="relative z-10 flex flex-col gap-3">
+                        <div class="flex items-center justify-between">
+                            <div class="w-10 h-10 bg-amber-600 rounded-lg flex items-center justify-center text-white shadow-md border border-amber-400/30 group-hover:scale-105 transition-transform">
+                                <i class="fas fa-store text-lg"></i>
+                            </div>
+                            <span class="text-[10px] font-bold text-amber-300 bg-amber-500/20 px-2 py-0.5 rounded-full border border-amber-500/30">
+                                Gamificação Turma
+                            </span>
+                        </div>
+                        <div>
+                            <h3 class="text-base font-bold text-white group-hover:text-amber-300 transition-colors">
+                                SENAI Shop & Coins
+                            </h3>
+                            <p class="text-xs text-blue-100/75 mt-1 leading-relaxed">
+                                Loja virtual e ranking de moedas conquistadas pelos alunos através de entregas práticas.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="relative z-10 mt-4 pt-3 border-t border-white/10 flex items-center justify-between text-xs font-semibold text-amber-300 group-hover:text-white">
+                        <span>Acessar Loja Virtual</span>
+                        <i class="fas fa-arrow-right text-[10px] group-hover:translate-x-1 transition-transform"></i>
+                    </div>
+                </a>
+
+                <!-- 4. REPOSITÓRIO OFICIAL DO CURSO -->
+                <a href="https://github.com/curtytech/cursodevsenai" target="_blank" rel="noopener noreferrer"
+                    class="group relative flex flex-col justify-between bg-white/10 backdrop-blur-sm rounded-xl p-4 sm:p-5 border border-sky-400/30 hover:bg-white/15 hover:border-sky-400 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-sky-950/40 overflow-hidden">
+                    <div class="pointer-events-none absolute -right-8 -bottom-8 w-28 h-28 bg-sky-500/20 rounded-full blur-xl group-hover:bg-sky-500/30 transition-all"></div>
+
+                    <div class="relative z-10 flex flex-col gap-3">
+                        <div class="flex items-center justify-between">
+                            <div class="w-10 h-10 bg-sky-700 rounded-lg flex items-center justify-center text-white shadow-md border border-sky-400/30 group-hover:scale-105 transition-transform">
+                                <i class="fab fa-github text-xl"></i>
+                            </div>
+                            <span class="text-[10px] font-bold text-sky-300 bg-sky-500/20 px-2 py-0.5 rounded-full border border-sky-500/30">
+                                Código Aberto
+                            </span>
+                        </div>
+                        <div>
+                            <h3 class="text-base font-bold text-white group-hover:text-sky-300 transition-colors">
+                                Repositório do Curso
+                            </h3>
+                            <p class="text-xs text-blue-100/75 mt-1 leading-relaxed">
+                                Apostilas, PDFs, códigos de aula e exercícios oficiais compartilhados no GitHub.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="relative z-10 mt-4 pt-3 border-t border-white/10 flex items-center justify-between text-xs font-semibold text-sky-300 group-hover:text-white">
+                        <span>Ver Código-Fonte</span>
+                        <i class="fas fa-arrow-right text-[10px] group-hover:translate-x-1 transition-transform"></i>
+                    </div>
+                </a>
+
+            </section>
+
+            <!-- ==========================================
+                 SEÇÃO 3: COMPETÊNCIAS & ÁREAS DE FORMAÇÃO
+            =========================================== -->
+            <div id="competencias" class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2.5 mb-6 sm:mb-8 border-b border-white/10 pb-3 sm:pb-4">
+                <div class="flex items-center gap-2.5 sm:gap-3">
+                    <div class="w-9 h-9 sm:w-10 sm:h-10 bg-sky-600 rounded-xl flex items-center justify-center text-white shadow-lg shadow-sky-950/40 border border-sky-300/30 shrink-0">
+                        <i class="fas fa-layer-group text-sm sm:text-base"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-xl sm:text-2xl font-extrabold text-white tracking-tight">
+                            Competências Técnicas Desenvolvidas
+                        </h2>
+                        <p class="text-xs text-blue-200/80">
+                            Habilidades consolidadas através dos funis de validação prática.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-14" aria-label="Competências da Formação">
+
+                <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 sm:p-5 border border-white/15 hover:bg-white/15 transition-all">
+                    <div class="w-9 h-9 rounded-lg bg-emerald-600/30 border border-emerald-400/30 text-emerald-300 flex items-center justify-center mb-2.5">
+                        <i class="fas fa-code text-base"></i>
+                    </div>
+                    <h3 class="font-bold text-sm text-white">Frontend Reativo</h3>
+                    <p class="text-xs text-blue-100/75 mt-1 leading-relaxed">
+                        Arquitetura SPA, Single File Components, ciclo de vida e estado reativo com Vue.js.
+                    </p>
+                </div>
+
+                <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 sm:p-5 border border-white/15 hover:bg-white/15 transition-all">
+                    <div class="w-9 h-9 rounded-lg bg-amber-600/30 border border-amber-400/30 text-amber-300 flex items-center justify-center mb-2.5">
+                        <i class="fas fa-server text-base"></i>
+                    </div>
+                    <h3 class="font-bold text-sm text-white">Backend Modular</h3>
+                    <p class="text-xs text-blue-100/75 mt-1 leading-relaxed">
+                        Roteamento HTTP, templates Jinja2, ORM e microsserviços rápidos com Flask e Python.
+                    </p>
+                </div>
+
+                <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 sm:p-5 border border-white/15 hover:bg-white/15 transition-all">
+                    <div class="w-9 h-9 rounded-lg bg-orange-600/30 border border-orange-400/30 text-orange-300 flex items-center justify-center mb-2.5">
+                        <i class="fas fa-table-columns text-base"></i>
+                    </div>
+                    <h3 class="font-bold text-sm text-white">Painéis Administrativos</h3>
+                    <p class="text-xs text-blue-100/75 mt-1 leading-relaxed">
+                        Dashboards reativos, widgets analíticos e CRUDs corporativos com Filament PHP & Laravel.
+                    </p>
+                </div>
+
+                <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 sm:p-5 border border-white/15 hover:bg-white/15 transition-all">
+                    <div class="w-9 h-9 rounded-lg bg-purple-600/30 border border-purple-400/30 text-purple-300 flex items-center justify-center mb-2.5">
+                        <i class="fas fa-gamepad text-base"></i>
+                    </div>
+                    <h3 class="font-bold text-sm text-white">Metodologia Gamificada</h3>
+                    <p class="text-xs text-blue-100/75 mt-1 leading-relaxed">
+                        Bloqueio real com progressão por mérito técnico, retenção de conhecimento e foco prático.
+                    </p>
+                </div>
+
+            </section>
+
+            <!-- ==========================================
+                 ESTATÍSTICAS DA PLATAFORMA
+            =========================================== -->
+            <section class="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 mb-16" aria-label="Estatísticas">
+
+                <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl sm:rounded-2xl p-3.5 sm:p-5 text-center hover:bg-white/10 transition-all">
+                    <p class="text-2xl sm:text-4xl font-black bg-gradient-to-b from-white via-slate-200 to-slate-400 bg-clip-text text-transparent">
+                        4
+                    </p>
+                    <p class="text-[10px] sm:text-xs font-semibold text-amber-300/80 uppercase tracking-wider mt-1">
+                        Funis Gamificados
+                    </p>
+                </div>
+
+                <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl sm:rounded-2xl p-3.5 sm:p-5 text-center hover:bg-white/10 transition-all">
+                    <p class="text-2xl sm:text-4xl font-black bg-gradient-to-b from-white via-slate-200 to-slate-400 bg-clip-text text-transparent">
+                        60+
+                    </p>
+                    <p class="text-[10px] sm:text-xs font-semibold text-emerald-300/80 uppercase tracking-wider mt-1">
+                        Desafios Práticos
+                    </p>
+                </div>
+
+                <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl sm:rounded-2xl p-3.5 sm:p-5 text-center hover:bg-white/10 transition-all">
+                    <p class="text-2xl sm:text-4xl font-black bg-gradient-to-b from-white via-slate-200 to-slate-400 bg-clip-text text-transparent">
+                        100%
+                    </p>
+                    <p class="text-[10px] sm:text-xs font-semibold text-sky-300/80 uppercase tracking-wider mt-1">
+                        Foco Prático SENAI
+                    </p>
+                </div>
+
+                <div class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl sm:rounded-2xl p-3.5 sm:p-5 text-center hover:bg-white/10 transition-all">
+                    <p class="text-2xl sm:text-4xl font-black bg-gradient-to-b from-white via-slate-200 to-slate-400 bg-clip-text text-transparent">
+                        ∞
+                    </p>
+                    <p class="text-[10px] sm:text-xs font-semibold text-purple-300/80 uppercase tracking-wider mt-1">
+                        Possibilidades Dev
+                    </p>
+                </div>
+
+            </section>
+
+        </main>
+
+        <!-- ==========================================
+             FOOTER (PADRÃO CURSODEV)
+        =========================================== -->
+        <footer class="mt-auto border-t border-white/10 bg-[rgba(5,15,29,0.95)] py-6 sm:py-8 text-center text-xs text-blue-200/80 px-4">
+            <div class="flex items-center justify-center gap-2 mb-2">
+                <i class="fas fa-code text-sky-400"></i>
+                <p class="font-semibold text-white">DevTube SENAI — Hub de Funis Gamificados</p>
+            </div>
+            <p class="text-[10px] sm:text-[11px] text-blue-300/60 max-w-md mx-auto">
+                © 2026 • Plataforma mantida pela turma SENAI DEV TEAM • Integrada ao portal oficial CursoDevSENAI
             </p>
+        </footer>
 
-        </div>
-
-
-        <section
-            class="cards"
-            aria-label="Cursos de tecnologia">
-
-
-            <!-- =========================
-                 VUE (LINK DIRETO PLAYLIST)
-            ========================= -->
-
-            <article class="card">
-
-                <div class="course-icon"
-                    aria-label="Ícone de Vue">
-                    <i class="devicon-vuejs-plain colored"></i>
-                </div>
-
-                <h2>
-                    Vue
-                </h2>
-
-                <p>
-                    Construa interfaces modernas e reativas com Vue.js 3.
-                </p>
-
-                <div class="card-btn-group">
-                    <a
-                        href="https://oscarmoraes.github.io/VueGamificado/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="btn-assistir">
-                        ▶ Vue
-                    </a>
-                    <a
-                        href="https://oscarmoraes.github.io/Vue3Gamificado/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="btn-assistir">
-                        ▶ Vue 3
-                    </a>
-                </div>
-            </article>
-
-
-            <!-- =========================
-                 FLASK & PYTHON (LINK DIRETO PLAYLIST)
-            ========================= -->
-
-            <article class="card">
-
-                <div class="course-icon"
-                    aria-label="Ícone de Flask e Python">
-                    <i class="devicon-flask-original"></i>
-                </div>
-
-                <h2>
-                    Flask
-                </h2>
-
-                <p>
-                    Crie servidores web, rotas, templates e APIs com Flask e Python.
-                </p>
-
-                <a
-                    href="https://oscarmoraes.github.io/FlaskGamificado/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="btn-assistir">
-
-                    ▶ Assistir
-
-                </a>
-
-            </article>
-
-
-            <!-- =========================
-                 FILAMENT PHP & LARAVEL (LINK DIRETO PLAYLIST)
-            ========================= -->
-
-            <article class="card">
-
-                <div class="course-icon"
-                    aria-label="Ícone de Filament e Laravel">
-                    <i class="devicon-laravel-plain colored"></i>
-                </div>
-
-                <h2>
-                    Filament
-                </h2>
-
-                <p>
-                    Construa painéis administrativos completos, tabelas reativas e dashboards com Filament e Laravel.
-                </p>
-
-                <a
-                    href="https://oscarmoraes.github.io/FilamentGamificado/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="btn-assistir">
-
-                    ▶ Assistir
-
-                </a>
-
-            </article>
-
-
-            <!-- =========================
-                 CIBERSEGURANÇA
-            ========================= -->
-
-            <article class="card">
-
-                <div class="course-icon"
-                    aria-label="Ícone de cibersegurança">
-
-                     <i class="fa-solid fa-user-lock"></i>
-                </div>
-
-                <h2>
-                    Cibersegurança
-                </h2>
-
-                <p>
-                    Aprenda a proteger sistemas, redes e dados no mundo digital.
-                </p>
-
-                <button
-                    type="button"
-                    class="open-video"
-                    data-video="https://www.youtube.com/embed/inWWhr5tnEA"
-                    data-title="Cibersegurança">
-
-                    ▶ Assistir
-
-                </button>
-
-            </article>
-
-
-            <!-- =========================
-                 GITHUB
-            ========================= -->
-
-            <article class="card">
-
-                <div class="course-icon"
-                    aria-label="Ícone do GitHub">
-                    
-                    <i class="devicon-github-original colored" style="font-size: 50px; color: purple"></i>
-          
-                </div>
-
-                <h2>
-                    GitHub
-                </h2>
-
-                <p>
-                    Versione, colabore e desenvolva projetos de forma profissional.
-                </p>
-
-                <button
-                    type="button"
-                    class="open-video"
-                    data-video="https://www.youtube.com/embed/RGOj5yH7evk"
-                    data-title="GitHub">
-
-                    ▶ Assistir
-
-                </button>
-
-            </article>
-
-
-            <!-- =========================
-                 HTML
-            ========================= -->
-
-            <article class="card">
-
-                <div class="course-icon"
-                    aria-label="Ícone de HTML">
-                    <i class="fa-brands fa-html5"></i>
-                </div>
-
-                <h2>
-                    HTML
-                </h2>
-
-                <p>
-                    Aprenda a estruturar páginas web e criar interfaces com HTML.
-                </p>
-
-                <button
-                    type="button"
-                    class="open-video"
-                    data-video="https://www.youtube.com/embed/qz0aGYrrlhU"
-                    data-title="HTML">
-
-                    ▶ Assistir
-
-                </button>
-
-            </article>
-
-        </section>
-
-
-        <!-- =========================
-             ÁREAS DE TECNOLOGIA
-        ========================= -->
-
-        <section
-            class="info-section"
-            id="tecnologia">
-
-            <div class="section-title">
-
-                <h2>
-                    Áreas de Tecnologia
-                </h2>
-
-                <p>
-                    Conheça algumas das principais áreas
-                    para desenvolver sua carreira.
-                </p>
-
-            </div>
-
-
-            <div class="info-grid">
-
-                <article class="info-box">
-
-                    <h3>
-                        💻 Desenvolvimento
-                    </h3>
-
-                    <p>
-                        Aprenda a criar sites, sistemas,
-                        aplicações e soluções digitais
-                        utilizando diferentes tecnologias
-                        de programação.
-                    </p>
-
-                </article>
-
-
-                <article class="info-box">
-                
-                    <h3>
-                        🔒 Cibersegurança
-                    </h3>
-                         
-          
-                    <p>
-                        Conheça conceitos de proteção
-                        de dados, redes, sistemas e
-                        segurança da informação.
-                    </p>
-
-                </article>
-
-
-                <article class="info-box">
-
-                    <h3>
-                        ⚡ Filament & Laravel
-                    </h3>
-
-                    <p>
-                        Construa painéis administrativos
-                        elegantes, formulários reativos,
-                        tabelas e dashboards completos.
-                    </p>
-
-                </article>
-
-
-                <article class="info-box">
-
-                    <h3>
-                        🧪 Flask & Python
-                    </h3>
-
-                    <p>
-                        Desenvolva servidores web,
-                        rotas, templates Jinja2 e
-                        bancos de dados com ORM.
-                    </p>
-
-                </article>
-
-            </div>
-
-        </section>
-
-
-        <!-- =========================
-             ESTATÍSTICAS
-        ========================= -->
-
-        <section class="stats">
-
-            <div class="stat">
-
-                <strong>
-                    100%
-                </strong>
-
-                <span>
-                    Foco em tecnologia
-                </span>
-
-            </div>
-
-
-            <div class="stat">
-
-                <strong>
-                    6
-                </strong>
-
-                <span>
-                    Conteúdos em destaque
-                </span>
-
-            </div>
-
-
-            <div class="stat">
-
-                <strong>
-                    4+
-                </strong>
-
-                <span>
-                    Áreas tecnológicas
-                </span>
-
-            </div>
-
-
-            <div class="stat">
-
-                <strong>
-                    ∞
-                </strong>
-
-                <span>
-                    Possibilidades
-                </span>
-
-            </div>
-
-        </section>
-
-    </main>
-
-
-    <!-- =========================
-         MODAL DE VÍDEO
-    ========================= -->
-
-    <section
-        class="video-modal"
-        id="videoModal"
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="modalTitulo"
-        aria-hidden="true">
-
-
-        <div class="modal-content">
-
-
-            <button
-                type="button"
-                class="close"
-                id="closeModal"
-                aria-label="Fechar vídeo">
-
-                &times;
-
-            </button>
-
-
-            <h2 id="modalTitulo">
-                Vídeo do curso
-            </h2>
-
-
-            <div class="video-container">
-
-                <iframe
-                    id="youtubePlayer"
-                    src="about:blank"
-                    title="Vídeo explicativo do curso"
-                    allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
-                    allowfullscreen>
-                </iframe>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- =========================
-         RODAPÉ
-    ========================= -->
-
-    <footer id="contato">
-
-        <p>
-            DevTube SENAI
-        </p>
-
-        <span>
-            Educação, tecnologia e inovação.
-        </span>
-
-        <span>
-            Cursos • Desenvolvimento • Tecnologia • Futuro
-        </span>
-
-    </footer>
-
-
-    <!-- =========================
-         JAVASCRIPT
-    ========================= -->
-
-    <script>
-
-        /* =========================
-           GERENCIAMENTO DO TEMA
-        ========================= */
-
-        const themeToggle =
-            document.getElementById(
-                "themeToggle"
-            );
-
-        const themeIcon =
-            themeToggle.querySelector(
-                "i"
-            );
-
-        // Recupera tema salvo no localStorage
-        const savedTheme =
-            localStorage.getItem(
-                "devtube_theme"
-            );
-
-        if (savedTheme === "white") {
-            document.body.classList.add(
-                "white-mode"
-            );
-            themeIcon.classList.remove(
-                "fa-moon"
-            );
-            themeIcon.classList.add(
-                "fa-sun"
-            );
-        }
-
-        themeToggle.addEventListener(
-            "click",
-            function () {
-
-                const isWhite =
-                    document.body.classList.toggle(
-                        "white-mode"
-                    );
-
-                if (isWhite) {
-                    themeIcon.classList.remove(
-                        "fa-moon"
-                    );
-                    themeIcon.classList.add(
-                        "fa-sun"
-                    );
-                    localStorage.setItem(
-                        "devtube_theme",
-                        "white"
-                    );
-                } else {
-                    themeIcon.classList.remove(
-                        "fa-sun"
-                    );
-                    themeIcon.classList.add(
-                        "fa-moon"
-                    );
-                    localStorage.setItem(
-                        "devtube_theme",
-                        "dark"
-                    );
-                }
-
-            }
-        );
-
-
-        /* =========================
-           MODAL DE VÍDEO
-        ========================= */
-
-        const modal =
-            document.getElementById(
-                "videoModal"
-            );
-
-
-        const player =
-            document.getElementById(
-                "youtubePlayer"
-            );
-
-
-        const closeButton =
-            document.getElementById(
-                "closeModal"
-            );
-
-
-        const modalTitulo =
-            document.getElementById(
-                "modalTitulo"
-            );
-
-
-        const openButtons =
-            document.querySelectorAll(
-                ".open-video"
-            );
-
-
-        /* =========================
-           ABRIR VÍDEO
-        ========================= */
-
-        openButtons.forEach(
-            function (button) {
-
-                button.addEventListener(
-                    "click",
-                    function () {
-
-                        const video =
-                            button.getAttribute(
-                                "data-video"
-                            );
-
-
-                        const titulo =
-                            button.getAttribute(
-                                "data-title"
-                            );
-
-
-                        modalTitulo.textContent =
-                            titulo;
-
-
-                        player.src =
-                            video +
-                            (video.includes("?") ? "&" : "?") +
-                            "autoplay=1&rel=0";
-
-
-                        modal.classList.add(
-                            "active"
-                        );
-
-
-                        modal.setAttribute(
-                            "aria-hidden",
-                            "false"
-                        );
-
-
-                        document.body.classList.add(
-                            "modal-open"
-                        );
-
-                    }
-                );
-
-            }
-        );
-
-
-        /* =========================
-           FECHAR VÍDEO
-        ========================= */
-
-        function fecharModal() {
-
-            player.src =
-                "about:blank";
-
-
-            modal.classList.remove(
-                "active"
-            );
-
-
-            modal.setAttribute(
-                "aria-hidden",
-                "true"
-            );
-
-
-            document.body.classList.remove(
-                "modal-open"
-            );
-
-        }
-
-
-        /* BOTÃO X */
-
-        closeButton.addEventListener(
-            "click",
-            fecharModal
-        );
-
-
-        /* CLICAR FORA */
-
-        modal.addEventListener(
-            "click",
-            function (event) {
-
-                if (
-                    event.target === modal
-                ) {
-
-                    fecharModal();
-
-                }
-
-            }
-        );
-
-
-        /* TECLA ESC */
-
-        document.addEventListener(
-            "keydown",
-            function (event) {
-
-                if (
-                    event.key === "Escape" &&
-                    modal.classList.contains(
-                        "active"
-                    )
-                ) {
-
-                    fecharModal();
-
-                }
-
-            }
-        );
-
-    </script>
+    </div>
 
 </body>
 
