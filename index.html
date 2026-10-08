@@ -623,6 +623,22 @@
             z-index: 1;
         }
 
+        .card-btn-group {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            width: 100%;
+            position: relative;
+            z-index: 1;
+        }
+
+        .card-btn-group a.btn-assistir {
+            padding: 10px 18px;
+            font-size: 14px;
+        }
+
 
         /* Card 1: Vue (link para a playlist) */
         .card:nth-child(1) a.btn-assistir {
@@ -1473,16 +1489,22 @@
                     Construa interfaces modernas e reativas com Vue.js 3.
                 </p>
 
-                <a
-                    href="https://oscarmoraes.github.io/VueGamificado/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="btn-assistir">
-
-                    ▶ Assistir
-
-                </a>
-
+                <div class="card-btn-group">
+                    <a
+                        href="https://oscarmoraes.github.io/VueGamificado/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="btn-assistir">
+                        ▶ Vue
+                    </a>
+                    <a
+                        href="https://oscarmoraes.github.io/Vue3Gamificado/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="btn-assistir">
+                        ▶ Vue 3
+                    </a>
+                </div>
             </article>
 
 
